@@ -109,8 +109,15 @@ def create_memory(
     )
     result: dict[str, Any] = {"queued": queue_id}
     if body.flush:
-        done, failed = memory.flush(limit=20)
-        result["flush"] = {"done": done, "failed": failed}
+        try:
+            done, failed = memory.flush(limit=20)
+            result["flush"] = {"done": done, "failed": failed}
+        except Exception as exc:
+            result["flush"] = {
+                "done": 0,
+                "failed": 1,
+                "error": str(exc),
+            }
     return result
 
 
