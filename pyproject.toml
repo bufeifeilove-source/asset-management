@@ -1,0 +1,30 @@
+[project]
+name = "memory-system"
+version = "0.1.0"
+description = "Local memory client for Hermes and Claude Code backed by Qdrant."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "httpx>=0.27.0",
+    "python-dotenv>=1.0.1",
+    "uvicorn[standard]>=0.30.0",
+]
+
+[project.scripts]
+mem = "memctl:main"
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = [
+    "memctl",
+    "memory_client",
+    "memory_config",
+    "memory_queue",
+]
+packages = ["backend"]
+
+[tool.uv]
+package = false
